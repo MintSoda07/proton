@@ -1,18 +1,33 @@
 import { useTranslation } from 'react-i18next'
 
-export default function LocaleSwitcher() {
+type Props = {
+    /** "plain"이면 배경/테두리 제거 */
+    variant?: 'plain' | 'glass'
+    className?: string
+}
+
+export default function LocaleSwitcher({ variant = 'plain', className = '' }: Props) {
     const { i18n, t } = useTranslation()
+
     const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const lng = e.target.value
         i18n.changeLanguage(lng)
         localStorage.setItem('proton:lang', lng)
     }
+
+    const base =
+        variant === 'plain'
+            ? // 배경/테두리 없는 버전
+            'bg-transparent border-0 px-2 py-1 text-sm text-white/80 hover:text-white focus:outline-none focus:ring-0'
+            : // 필요 시 글래스 버전도 사용 가능
+            'glass rounded-md px-2 py-1.5 text-sm'
+
     return (
-        <label className="inline-flex items-center gap-2">
+        <label className={`inline-flex items-center gap-2 ${className}`}>
             <span className="sr-only">{t('nav.language')}</span>
             <select
                 aria-label={t('nav.language')}
-                className="bg-white/5 border border-white/10 rounded-md px-2 py-1 text-sm"
+                className={`${base} appearance-none`}
                 value={i18n.resolvedLanguage}
                 onChange={onChange}
             >

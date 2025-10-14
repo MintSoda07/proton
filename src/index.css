@@ -1,26 +1,136 @@
 @import "tailwindcss";
 
+/* Design tokens */
 :root {
-  --base:   #0B0F14;
+  --base: #0B0F14;
   --accent: #00E0FF;
   --violet: #8B5CF6;
-  --text:   #FFFFFF;
+  --text: #FFFFFF;
+  --muted: 228 8% 84%;
+  /* hsl for opacity utilities if needed */
 }
 
-/* 이하 당신의 커스텀 */
-html, body, #root { height: 100%; }
+html,
+body,
+#root {
+  height: 100%;
+}
+
 body {
   margin: 0;
   color: var(--text);
-  background: var(--base);
+  background:
+    radial-gradient(1200px 800px at 70% -10%, color-mix(in oklab, var(--accent) 8%, transparent), transparent),
+    radial-gradient(900px 600px at -10% 20%, color-mix(in oklab, var(--violet) 8%, transparent), transparent),
+    var(--base);
 }
 
-.bg-base{background-color:var(--base)}
-.text-accent{color:var(--accent)}
-.text-violet{color:var(--violet)}
-.bg-accent{background-color:var(--accent)}
-.bg-violet{background-color:var(--violet)}
-.gradient-accent{background-image:linear-gradient(90deg,var(--accent),var(--violet))}
-.ring-accent-20{box-shadow:0 0 0 1px color-mix(in oklab,var(--accent) 20%, transparent)}
+/* Color helpers */
+.bg-base {
+  background-color: var(--base)
+}
 
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.text-accent {
+  color: var(--accent)
+}
+
+.text-violet {
+  color: var(--violet)
+}
+
+.bg-accent {
+  background-color: var(--accent)
+}
+
+.bg-violet {
+  background-color: var(--violet)
+}
+
+.gradient-accent {
+  background-image: linear-gradient(90deg, var(--accent), var(--violet))
+}
+
+/* Focus ring & outline */
+.focus-ring {
+  outline: none;
+  box-shadow: 0 0 0 0px transparent;
+}
+
+.focus-ring:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 45%, transparent);
+  border-radius: 12px;
+}
+
+/* Glass & card */
+.glass {
+  background: color-mix(in oklab, white 7%, transparent);
+  border: 1px solid color-mix(in oklab, white 12%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.card {
+  border: 1px solid color-mix(in oklab, white 12%, transparent);
+  background: color-mix(in oklab, white 5%, transparent);
+  border-radius: 14px;
+}
+
+/* Buttons */
+.btn {
+  /* display:inline-flex;  <-- 제거하여 md:hidden 등 반응형 hidden이 정상 동작 */
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  border: 1px solid color-mix(in oklab, white 14%, transparent);
+  transition: transform .12s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, var(--accent), var(--violet));
+  color: #0B0F14;
+  border-color: transparent;
+}
+
+.btn-ghost {
+  background: color-mix(in oklab, white 4%, transparent);
+  color: white;
+}
+
+.btn-ghost:hover {
+  background: color-mix(in oklab, white 8%, transparent);
+}
+
+/* Layout helpers */
+.container-proton {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+/* A11y */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0
+}
+
+/* Subtle border ring */
+.ring-accent-20 {
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--accent) 20%, transparent)
+}
