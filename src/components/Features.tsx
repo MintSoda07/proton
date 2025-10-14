@@ -11,9 +11,9 @@ const items = (t: (k: string) => string) => ([
 export default function Features() {
     const { t } = useTranslation()
     const list = items(t)
+
     return (
         <section className="bg-base relative" aria-labelledby="features">
-            {/* faint divider */}
             <div className="h-px w-full bg-white/10" />
             <div className="container-proton py-14">
                 <h2 id="features" className="text-2xl md:text-3xl font-bold">
@@ -28,11 +28,19 @@ export default function Features() {
                     className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
                 >
                     {list.map((f, i) => (
-                        <motion.article key={i}
-                            variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0, transition: { duration: .45 } } }}
-                            className="card p-5 transition-transform will-change-transform hover:-translate-y-1"
+                        <motion.article
+                            key={i}
+                            variants={{
+                                hidden: { opacity: 0, y: 10 },
+                                show: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+                            }}
+                            className="card hoverable hover-glow p-5 transition-transform will-change-transform"
                         >
-                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-accent to-violet mb-4" />
+                            <div
+                                className="w-10 h-10 rounded-lg mb-4 hover-lift"
+                                style={{ backgroundImage: 'linear-gradient(135deg, var(--accent), var(--violet))' }}
+                                aria-hidden
+                            />
                             <h3 className="font-semibold">{f.title}</h3>
                             <p className="mt-2 text-sm text-white/70 leading-relaxed">{f.desc}</p>
                         </motion.article>

@@ -3,7 +3,6 @@ import React from 'react'
 import { motion, type MotionProps } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 
-// Framer Motion: use cubic-bezier array for type-safe easing
 const easeOutBezier = [0.16, 1, 0.3, 1] as const
 
 const fadeUp = (delay = 0): MotionProps => ({
@@ -29,20 +28,20 @@ export default function Hero() {
                         'linear-gradient(to right, rgba(255,255,255,.2) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.2) 1px, transparent 1px)',
                     backgroundSize: '48px 48px',
                 }}
+                aria-hidden
             />
+
             {/* accent glow ring */}
             <div
                 className="pointer-events-none absolute -top-24 -left-24 w-[420px] h-[420px] rounded-full blur-3xl"
                 style={{ background: 'radial-gradient(closest-side, #00E0FF33, transparent)' }}
+                aria-hidden
             />
 
             <div className="container-proton py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
                 {/* Left */}
                 <div>
-                    <motion.h1
-                        {...fadeUp(0)}
-                        className="text-4xl md:text-5xl font-extrabold leading-tight"
-                    >
+                    <motion.h1 {...fadeUp(0)} className="text-4xl md:text-5xl font-extrabold leading-tight">
                         {t('hero.title')}
                     </motion.h1>
 
@@ -51,15 +50,23 @@ export default function Hero() {
                     </motion.p>
 
                     <motion.div {...fadeUp(0.18)} className="mt-6 flex flex-wrap gap-3">
-                        <a href="#get-started" className="btn btn-primary focus-ring">
+                        <a
+                            href="#get-started"
+                            className="btn btn-primary focus-ring hover-lift hover-glow"
+                            data-ripple
+                        >
                             {t('hero.ctaPrimary')}
                         </a>
-                        <a href="#products" className="btn btn-ghost focus-ring">
+                        <a
+                            href="#products"
+                            className="btn btn-ghost focus-ring hover-lift"
+                            data-ripple
+                        >
                             {t('hero.ctaSecondary')}
                         </a>
                     </motion.div>
 
-                    <motion.div {...fadeUp(0.24)} className="mt-10 glass rounded-xl p-5">
+                    <motion.div {...fadeUp(0.24)} className="mt-10 glass rounded-xl p-5 hoverable">
                         <h3 className="text-lg font-semibold">{t('hero.leftTitle')}</h3>
                         <p className="mt-2 text-white/70">{t('hero.leftDesc')}</p>
                     </motion.div>
@@ -70,7 +77,7 @@ export default function Hero() {
                     <div
                         role="img"
                         aria-label={t('hero.placeholderAlt')}
-                        className="aspect-video w-full rounded-2xl card grid place-items-center overflow-hidden relative"
+                        className="aspect-video w-full rounded-2xl card hoverable grid place-items-center overflow-hidden relative"
                     >
                         <div className="text-white/60">Product Image Placeholder</div>
 
@@ -83,6 +90,7 @@ export default function Hero() {
                                 transform: 'translateX(-60%)',
                                 animation: 'sheen 3s ease-in-out 1.2s infinite',
                             }}
+                            aria-hidden
                         />
                         <style>{`
               @keyframes sheen {
@@ -98,6 +106,7 @@ export default function Hero() {
                     <div
                         className="pointer-events-none absolute inset-0 rounded-2xl"
                         style={{ boxShadow: '0 0 60px 8px #00E0FF22' }}
+                        aria-hidden
                     />
                 </motion.div>
             </div>
