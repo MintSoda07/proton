@@ -13,13 +13,12 @@ html, body, #root { height: 100%; }
 html { -webkit-text-size-adjust: 100%; }
 body { margin: 0; }
 
-/* --------- Design Tokens --------- */
 :root {
   --base: #0B0F14;
-  --accent: #00E0FF;
-  --violet: #8B5CF6;
+  /* Mint (accent) & Sky (secondary) */
+  --accent: #72F1B8;  /* bright mint/연두 */
+  --violet: #7DD3FC;  /* sky blue/하늘 */
   --text: #FFFFFF;
-  /* HSL value for opacity utilities if needed */
   --muted: 228 8% 84%;
 
   /* Scrollbar (Chromium/Safari) */
@@ -34,10 +33,22 @@ body { margin: 0; }
 body {
   color: var(--text);
   background:
-    radial-gradient(1200px 800px at 70% -10%, color-mix(in oklab, var(--accent) 8%, transparent), transparent),
-    radial-gradient(900px 600px at -10% 20%, color-mix(in oklab, var(--violet) 8%, transparent), transparent),
-    var(--base);
+    /* 왼쪽 위 - 민트 글로우 */
+    radial-gradient(
+      1000px 700px at -10% 20%,
+      color-mix(in oklab, var(--accent) 10%, transparent),
+      transparent
+    ),
+    /* 오른쪽 위 - 하늘 글로우 */
+    radial-gradient(
+      1200px 800px at 70% -10%,
+      color-mix(in oklab, var(--violet) 12%, transparent),
+      transparent
+    ),
+    /* 전체 베이스 - 아주 짙은 청록/남색 톤 */
+    #071013;
 }
+
 
 /* --------- Helpers (colors/layout/a11y) --------- */
 .bg-base { background-color: var(--base); }
@@ -170,7 +181,9 @@ body {
   color: var(--text);
   background:
     linear-gradient(90deg, color-mix(in oklab, white 5%, transparent), color-mix(in oklab, white 3%, transparent)),
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2300E0FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>") no-repeat right 12px center / 18px 18px;
+    /* stroke='%2372F1B8' == --accent (mint) */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2372F1B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>")
+    no-repeat right 12px center / 18px 18px;
   border: 1px solid color-mix(in oklab, white 12%, transparent);
   transition: border-color .2s, box-shadow .2s, background .2s;
 }
@@ -314,39 +327,23 @@ input[type="radio"].control-input {
 @supports not (background: color-mix(in oklab, white 5%, transparent)) {
   :root {
     --sb-track: rgba(255,255,255,0.06);
-    --sb-thumb: rgba(0,224,255,0.55);
-    --sb-thumb-hover: rgba(139,92,246,0.6);
+    /* thumb ~ mint, hover ~ sky */
+    --sb-thumb: rgba(114,241,184,0.55);  /* #72F1B8 */
+    --sb-thumb-hover: rgba(125,211,252,0.60); /* #7DD3FC */
   }
-  .glass { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.12); }
-  .card { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); }
-  .btn { border-color: rgba(255,255,255,0.14); background: rgba(255,255,255,0.04); }
-  .btn-ghost { background: rgba(255,255,255,0.04); }
-  .btn-ghost:hover { background: rgba(255,255,255,0.08); }
-  .input-proton { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); }
-  .input-proton:focus { box-shadow: 0 0 0 3px rgba(0,224,255,0.22); border-color: rgba(0,224,255,0.48); }
-  .select-proton { border-color: rgba(255,255,255,0.12); }
-  .dropdown-menu {
-    background: rgba(255,255,255,0.06);
-    border-color: rgba(255,255,255,0.12);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.10);
+  .input-proton:focus {
+    /* focus ring ~ mint */
+    box-shadow: 0 0 0 3px rgba(114,241,184,0.22);
+    border-color: rgba(114,241,184,0.48);
   }
-  .menu-item:hover { background: rgba(0,224,255,0.14); }
-  .control { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.16); }
-  .checkbox-proton input:focus + .control { box-shadow: 0 0 0 3px rgba(0,224,255,0.22); }
+  .menu-item:hover { background: rgba(114,241,184,0.14); }
+  .checkbox-proton input:focus + .control { box-shadow: 0 0 0 3px rgba(114,241,184,0.22); }
   .checkbox-proton input:checked + .control {
-    border-color: rgba(0,224,255,0.60);
-    background: rgba(0,224,255,0.12);
-  }
-  .switch-proton { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.14); }
-  .tooltip-proton[data-tip]::after {
-    background: rgba(0,0,0,0.7);
-    border-color: rgba(255,255,255,0.12);
-  }
-  .modal-proton .panel {
-    background: rgba(255,255,255,0.06);
-    border-color: rgba(255,255,255,0.12);
+    border-color: rgba(114,241,184,0.60);
+    background: rgba(114,241,184,0.12);
   }
 }
+
 
 /* =========================
    Hover & Selection FX Add-on

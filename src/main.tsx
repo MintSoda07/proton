@@ -45,7 +45,7 @@ function applyTitle(lng: string) {
   i18n.on("languageChanged", (lng) => {
     try {
       localStorage.setItem("proton:lang", lng);
-    } catch { }
+    } catch (error){ console.log("hi,"+error)}
     applyHtmlAttrs(lng);
     applyTitle(lng);
   });
