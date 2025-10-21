@@ -1,9 +1,15 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 // Project.tsx
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import ModelingView from '../project_pages/ModelingView';
 import FullscreenProjectView from '../project_pages/FullscreenProjectView';
 import { useState } from 'react';
+=======
+import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { TopBar } from '../components/TopbarProton';
+>>>>>>> Stashed changes
 =======
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -148,7 +154,10 @@ export default function Project() {
   const [sp] = useSearchParams();
   const navigate = useNavigate();
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   const type = (sp.get('type') ?? 'sketch').toLowerCase();
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 
@@ -160,6 +169,7 @@ export default function Project() {
   const projectType = sp.get('type') ?? 'sketch';
   const projectName = decodeURIComponent(sp.get('name') ?? '무제 프로젝트');
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
   // modeling은 "상위 css 무시 + 전체 화면"
   if (type === 'modeling') {
@@ -248,6 +258,69 @@ export default function Project() {
         {labels[status as keyof typeof labels]}
       </span>
     );
+=======
+  // 가상 프로젝트 정보
+  const projectInfo: ProjectInfo = {
+    id: id || '',
+    name: projectName,
+    type: projectType,
+    createdAt: '2024-01-15 14:30',
+    lastModified: '방금 전',
+    size: '2.4 MB',
+    status: 'active',
+  };
+
+  // 도구 목록 (프로젝트 타입에 따라 달라질 수 있음)
+  const tools: ToolItem[] = [
+    {
+      id: 'move',
+      name: '이동',
+      icon: <MoveIcon className="w-5 h-5" />,
+      shortcut: 'V',
+      category: 'basic',
+    },
+    {
+      id: 'brush',
+      name: '브러쉬',
+      icon: <BrushIcon className="w-5 h-5" />,
+      shortcut: 'B',
+      category: 'paint',
+    },
+    {
+      id: 'zoom',
+      name: '확대/축소',
+      icon: <ZoomIcon className="w-5 h-5" />,
+      shortcut: 'Z',
+      category: 'basic',
+    },
+    {
+      id: 'layers',
+      name: '레이어',
+      icon: <LayersIcon className="w-5 h-5" />,
+      shortcut: 'L',
+      category: 'organize',
+    },
+  ];
+
+  const getStatusBadge = (status: string) => {
+    const styles = {
+      active: 'bg-green-500/20 text-green-300 border-green-500/30',
+      saved: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
+      syncing: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30',
+    };
+    const labels = {
+      active: '작업 중',
+      saved: '저장됨',
+      syncing: '동기화 중',
+    };
+    return (
+      <span
+        className={`px-2 py-1 text-xs rounded border ${styles[status as keyof typeof styles]}`}
+      >
+        {labels[status as keyof typeof labels]}
+      </span>
+    );
+>>>>>>> Stashed changes
 =======
   // 가상 프로젝트 정보
   const projectInfo: ProjectInfo = {
