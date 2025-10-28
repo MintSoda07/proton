@@ -199,9 +199,18 @@ export default function LoginDialog() {
                     </button>
 
                     <div className="mt-2 grid gap-2">
-                        <button type="button" className="btn focus-ring hover-glow" disabled={busy}>
-                            {t("auth.continueWith", { defaultValue: "Continue with" })} Google
-                        </button>
+                    <button
+    type="button"
+    className="btn focus-ring hover-glow"
+    disabled={busy}
+    onClick={() => {
+      // 서버가 세션 쿠키를 설정하므로 전체 리다이렉트로 가는 게 가장 확실
+      const redirect = window.location.origin; // 로그인 후 돌아올 주소 (지금 메인)
+      window.location.href = `http://localhost:4000/api/auth/google/start?redirect=${encodeURIComponent(redirect)}`;
+    }}
+  >
+    {t("auth.continueWith", { defaultValue: "Continue with" })} Google
+  </button>
                         <button type="button" className="btn focus-ring hover-glow" disabled={busy}>
                             {t("auth.continueWith", { defaultValue: "Continue with" })} GitHub
                         </button>
