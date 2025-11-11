@@ -47,6 +47,7 @@ function applyTitle(lng: string) {
     applyHtmlAttrs(lng);
     applyTitle(lng);
   });
+  
 
   // 2) **Google 로그인 세션 복구**
   // zustand 스토어(useAuthUser)에서 fetchMe 함수를 동적 import로 꺼내와 호출

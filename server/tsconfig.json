@@ -1,16 +1,18 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "lib": ["ES2020"],
-    "module": "ESNext",
+    "target": "ES2022",
+      // Node 런타임이든 번들러든 ESM이면 ES2022 모듈 추천
+    "module": "ES2022",
+      // Vite/tsup 등 번들러 사용 시
     "moduleResolution": "bundler",
+    "rootDir": "./src",
+    "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "rootDir": "src",
-    "outDir": "dist",
-    "types": ["node"]
+    // 서버 코드면 아래 두 줄 권장
+    "types": ["node"],
+    "resolveJsonModule": true
   },
-  "files": ["src/server.ts"],
-  "exclude": ["dist", "node_modules"]
+  "include": ["src/**/*.ts"]
 }
